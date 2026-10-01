@@ -326,6 +326,11 @@ ENTRYPOINT ["/init"]
 
 # Cranl builds the last stage; select the production image.
 FROM twenty AS cranl-production
+USER root
+# Newer pg_dump adds settings that Cranl's older PostgreSQL cannot restore.
+RUN apk add --no-cache postgresql16-client
+USER 1000
+ENV PATH="/usr/libexec/postgresql16:${PATH}"
 ENV APP_VERSION=2.44.0
 LABEL org.opencontainers.image.source="https://github.com/sadaaCX/twenty"
 COPY --chown=1000 packages/twenty-docker/twenty/cranl-backup.cjs ./cranl-backup.cjs

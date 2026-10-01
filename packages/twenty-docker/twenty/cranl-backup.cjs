@@ -39,6 +39,8 @@ async function main() {
   }
   const key = Buffer.from(process.env.BACKUP_ENCRYPTION_KEY, 'base64');
   assert.equal(key.length, 32, 'Backup encryption key must contain 32 bytes');
+  console.log('Database version:', execFileSync('psql', [process.env.PG_DATABASE_URL,
+    '-Atc', 'SHOW server_version']).toString().trim());
   const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
   const storage = new S3Client({
     region: 'auto', endpoint: process.env.STORAGE_S3_ENDPOINT,
