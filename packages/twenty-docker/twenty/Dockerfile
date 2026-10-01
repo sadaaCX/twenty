@@ -328,3 +328,6 @@ ENTRYPOINT ["/init"]
 FROM twenty AS cranl-production
 ENV APP_VERSION=2.44.0
 LABEL org.opencontainers.image.source="https://github.com/sadaaCX/twenty"
+COPY --chown=1000 packages/twenty-docker/twenty/cranl-backup.cjs ./cranl-backup.cjs
+CMD ["sh", "-c", "if [ \"$TWENTY_SERVICE\" = worker ]; then exec node dist/queue-worker/queue-worker; else exec node dist/main; fi"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=300s CMD curl --fail http://localhost:3000/healthz || exit 1

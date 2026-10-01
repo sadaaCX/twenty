@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { createServer } from 'node:http';
 
 import { ExceptionHandlerService } from 'src/engine/core-modules/exception-handler/exception-handler.service';
 import { LoggerService } from 'src/engine/core-modules/logger/logger.service';
@@ -24,6 +25,15 @@ async function bootstrap() {
     app.useLogger(loggerService ?? false);
 
     app.enableShutdownHooks();
+
+    // Cranl requires an HTTP health endpoint on each running service.
+    if (process.env.TWENTY_SERVICE === 'worker') {
+      const healthServer = createServer((request, response) => {
+        response.writeHead(request.url === '/healthz' ? 200 : 404);
+        response.end();
+      });
+      healthServer.listen(Number(process.env.NODE_PORT || 3000), '0.0.0.0');
+    }
   } catch (err) {
     loggerService?.error(err?.message, err?.name);
 
