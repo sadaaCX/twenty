@@ -1,8 +1,9 @@
 @import './viewport-zoom.css';
+@import './sadaa-brand.css';
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--t-font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--t-background-tertiary);

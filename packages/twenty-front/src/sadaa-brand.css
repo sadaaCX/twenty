@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'Sadaa Rakik';
+  src: url('/branding/HTRakik-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sadaa Rakik';
+  src: url('/branding/HTRakik-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+/* Keep the fork's palette separate from Twenty's generated design tokens. */
+.light.light,
+.dark.dark {
+  --t-font-family: 'Sadaa Rakik', Inter, sans-serif;
+}
+
+.light.light {
+  --t-background-secondary: #fff6db;
+  --t-background-tertiary: #fffaf0;
+  --t-accent-primary: #b5f2ec;
+  --t-accent-secondary: #b5f2ec;
+  --t-accent-tertiary: #def8f4;
+  --t-accent-quaternary: #eefbf8;
+  --t-accent-accent3570: #008078;
+  --t-accent-accent4060: #008078;
+  --t-color-blue: #00766f;
+  --t-color-blue10: #00675f;
+  --t-color-blue11: #00675f;
+  --t-color-blue12: #04302d;
+  --t-background-transparent-blue: #00d4c724;
+  --t-border-color-blue: #00a497;
+}
+
+.dark.dark {
+  --t-accent-primary: #174b46;
+  --t-accent-secondary: #174b46;
+  --t-accent-tertiary: #123b37;
+  --t-accent-quaternary: #102b28;
+  --t-accent-accent3570: #00d4c7;
+  --t-accent-accent4060: #00d4c7;
+  --t-color-blue: #00d4c7;
+  --t-color-blue10: #4ae3d7;
+  --t-color-blue11: #4ae3d7;
+  --t-color-blue12: #bcfff4;
+  --t-background-transparent-blue: #00d4c730;
+  --t-border-color-blue: #00978b;
+}
+
+/* Dark text keeps turquoise primary actions readable in either colour mode. */
+.light button[data-variant='solid'][data-color='neutral'],
+.dark button[data-variant='solid'][data-color='neutral'] {
+  --tw-button-background: #00d4c7;
+  --tw-button-color: #04302d;
+  --tw-button-hover: #4ae3d7;
+  --tw-button-active: #4ae3d7;
+}
+
+.dark .sadaa-wordmark {
+  filter: invert(1);
+}

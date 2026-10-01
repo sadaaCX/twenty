@@ -47,7 +47,9 @@ const StyledSecondaryLogoContainer = styled.div`
 `;
 
 const StyledPrimaryLogo = styled.div`
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100%;
   width: 100%;
 `;
@@ -60,7 +62,7 @@ export const Logo = ({
   to = AppPath.SignInUp,
 }: LogoProps) => {
   const { redirectToDefaultDomain } = useRedirectToDefaultDomain();
-  const defaultPrimaryLogoUrl = `${window.location.origin}/images/icons/android/android-launchericon-192-192.png`;
+  const defaultPrimaryLogoUrl = `${window.location.origin}/branding/sadaa-logo.svg`;
 
   const primaryLogoUrl = getImageAbsoluteURI({
     imageUrl: primaryLogo ?? defaultPrimaryLogoUrl,
@@ -77,10 +79,16 @@ export const Logo = ({
   const isUsingDefaultLogo = !isDefined(primaryLogo);
 
   return (
-    <StyledContainer onClick={() => onClick?.()}>
+    <StyledContainer
+      onClick={() => onClick?.()}
+      style={isUsingDefaultLogo ? { width: 144 } : undefined}
+    >
       {isUsingDefaultLogo ? (
         <UndecoratedLink to={to} onClick={() => redirectToDefaultDomain()}>
           <StyledPrimaryLogo
+            className="sadaa-wordmark"
+            role="img"
+            aria-label="Sadaa"
             style={{ backgroundImage: `url(${primaryLogoUrl})` }}
           />
         </UndecoratedLink>
@@ -89,12 +97,12 @@ export const Logo = ({
           style={{ backgroundImage: `url(${primaryLogoUrl})` }}
         />
       )}
-      {isDefined(secondaryLogoUrl) ? (
+      {!isUsingDefaultLogo && isDefined(secondaryLogoUrl) ? (
         <StyledSecondaryLogoContainer>
           <StyledSecondaryLogo src={secondaryLogoUrl} />
         </StyledSecondaryLogoContainer>
       ) : (
-        isDefined(placeholder) && (
+        !isUsingDefaultLogo && isDefined(placeholder) && (
           <StyledSecondaryLogoContainer>
             <Avatar
               size="lg"
