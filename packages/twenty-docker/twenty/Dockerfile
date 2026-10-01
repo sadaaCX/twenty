@@ -322,3 +322,9 @@ LABEL org.opencontainers.image.source=https://github.com/twentyhq/twenty
 LABEL org.opencontainers.image.description="All-in-one Twenty image for local development and SDK usage. Includes PostgreSQL, Redis, ClickHouse, server, and worker."
 
 ENTRYPOINT ["/init"]
+
+
+# Cranl builds the last stage; select the production image.
+FROM twenty AS cranl-production
+ENV APP_VERSION=2.44.0
+LABEL org.opencontainers.image.source="https://github.com/sadaaCX/twenty"
